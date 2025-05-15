@@ -1,5 +1,5 @@
 {
-    "name": "synergitech/creditsafe-connect",
+    "name": "intermixdevelopers/creditsafe-connect",
     "type": "library",
     "require": {
         "php": ">=7.1",

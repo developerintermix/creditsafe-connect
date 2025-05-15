@@ -44,49 +44,10 @@ class Company
         $this->companyID = $companyDetails['report']['companyId'];
         $this->businessName =
             $companyDetails['report']['companyIdentification']['basicInformation']['businessName'] ?? null;
-        $this->registeredCompanyName =
-            $companyDetails['report']['companyIdentification']['basicInformation']['registeredCompanyName'] ?? null;
         $this->companyRegistrationNumber =
             $companyDetails['report']['companyIdentification']['basicInformation']['companyRegistrationNumber'] ?? null;
-        $this->country = $companyDetails['report']['companyIdentification']['basicInformation']['country'] ?? null;
-
-        if (isset($companyDetails['report']['companyIdentification']['basicInformation']['companyRegistrationDate'])) {
-            $this->companyRegistrationDate =
-                $companyDetails['report']['companyIdentification']['basicInformation']['companyRegistrationDate'];
-        }
 
         $this->mainAddress = $companyDetails['report']['contactInformation']['mainAddress'] ?? [];
-        $this->otherAddresses = $companyDetails['report']['contactInformation']['otherAddresses'] ?? [];
-
-        $this->currentDirectors = array_map(function ($director) {
-            return new Company\Director($this, $director);
-        }, $companyDetails['report']['directors']['currentDirectors'] ?? []);
-
-        $this->previousDirectors = array_map(function ($director) {
-            return new Company\PreviousDirector($this, $director);
-        }, $companyDetails['report']['directors']['previousDirectors'] ?? []);
-
-        $this->financialStatements = array_map(function ($statement) {
-            return new Company\FinancialStatement($this, $statement);
-        }, $companyDetails['report']['financialStatements'] ?? []);
-
-        $this->history = array_map(function ($history) {
-            $history['date'] = new \DateTime($history['date']);
-            return $history;
-        }, $companyDetails['report']['additionalInformation']['companyHistory'] ?? []);
-
-        $this->commentaries = $companyDetails['report']['additionalInformation']['commentaries'] ?? [];
-        $this->creditScore = new Company\CreditScore($this, $companyDetails['report']['creditScore'] ?? []);
-        $this->shareholders = array_map(function ($shareholder) {
-            return new Company\Shareholder($this, $shareholder);
-        }, $companyDetails['report']['shareCapitalStructure']['shareHolders'] ?? []);
-
-        $this->numberOfSharesIssued =
-            $companyDetails['report']['shareCapitalStructure']['numberOfSharesIssued'] ?? null;
-        $this->issuedShareCapital = $companyDetails['report']['shareCapitalStructure']['issuedShareCapital'] ?? [];
-        $this->mortgageSummary = $companyDetails['report']['additionalInformation']['mortgageSummary'] ?? [];
-        $this->mortgages = $companyDetails['report']['additionalInformation']['mortgageDetails'] ?? null;
-        $this->negativeInfo = $companyDetails['report']['negativeInformation'] ?? [];
         $this->rawDetails = $companyDetails;
     }
 

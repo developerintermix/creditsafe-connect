@@ -11,7 +11,7 @@ class ListResult implements \Iterator
     protected $targetClass;
     protected $endpoint;
     protected $params;
-    protected $pageSize = 10;
+    protected $pageSize = 5;
     protected $currentPagePos = null;
     protected $currentRecordPos = null;
     protected $currentRecordSet = [];

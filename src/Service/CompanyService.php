@@ -28,10 +28,10 @@ class CompanyService
      * @param  array  $params Contains params that can be passed to the endpoint
      * @return array   Returns the results of the search endpoint
      */
-    public function search(array $params): ListResult
+    public function search(array $params): array
     {
         $list = new ListResult($this->client, CompanySearchResult::class, 'companies', $params);
-        return $list;
+        return $list->page(1);
     }
 
     /**
